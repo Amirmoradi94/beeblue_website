@@ -21,8 +21,6 @@ WORKDIR /usr/share/nginx/html
 # Copy build output from previous stage
 COPY --from=build /app/dist .
 
-# Copy Nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose required ports
 EXPOSE 80

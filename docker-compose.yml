@@ -1,0 +1,27 @@
+
+services:
+  frontend:
+    build:
+      context: ./frontend  
+    container_name: frontend
+    ports:
+      - "5173:5173" 
+    restart: always  
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx/beeblue.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - frontend
+    restart: always
+
+volumes:
+  db_data:  
